@@ -1,6 +1,8 @@
 from alpine:latest
+
 RUN apk add --no-cache py3-pip \
-    && pip3 install --upgrade pip
+    && pip3 install --upgrade pip \
+    && apk add --no-cache apache2-mod-wsgi
 
 ENV PORT 8080
 EXPOSE 8080
