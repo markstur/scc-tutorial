@@ -1,13 +1,15 @@
-FROM registry.redhat.io/ubi8/python-38
+from alpine:latest
+RUN apk add --no-cache py3-pip \
+    && pip3 install --upgrade pip
+
 ENV PORT 8080
 EXPOSE 8080
-WORKDIR /usr/src/app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /app
+COPY . /app
 
-COPY . .
+RUN pip3 --no-cache-dir install -r requirements.txt
 
-ENTRYPOINT ["python"] 
+ENTRYPOINT ["python3"]
 CMD ["app.py"]
 
